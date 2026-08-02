@@ -76,32 +76,32 @@ python main.py
 
 ### 🏠 Main Menu
 
-![Main Menu](screenshots/login.png)
+![Main Menu](screenshot/login.png)
 
 ---
 
 ### 🔐 Login
 
-![Login](screenshots/dashboard.png)
+![Login](screenshot/dashboard.png)
 
 ---
 
 ### 📚 Subject Management
 
-![Subjects](screenshots/subjects.png)
+![Subjects](screenshot/subjects.png)
 
 ---
 
 ### ✅ Task Management
 
-![Tasks](screenshots/task1.png)
-![Tasks](screenshots/task2.png)
+![Tasks](screenshot/task1.png)
+![Tasks](screenshot/task2.png)
 
 ---
 
 ### 📊 Progress
 
-![Progress](screenshots/progress.png)
+![Progress](screenshot/progress.png)
 
 ---
 
