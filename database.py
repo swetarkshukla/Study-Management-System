@@ -1,0 +1,9 @@
+username = []
+password = []
+name = []
+course = []
+semester = []
+cgpa_target = []
+subject_uni = []
+tasks_uni = []
+usercode=0
