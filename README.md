@@ -9,69 +9,51 @@ The application allows users to register, log in, manage subjects, create study 
 ## ✨ Features
 
 - 🔐 User Registration & Login
-- 📚 Subject Management
-- ✅ Task Management
-- 📈 Progress Tracking
-- 💾 Automatic JSON Data Storage
-- 👥 Multi-user Support
-- ⚠️ Input Validation & Error Handling
-- 📊 Subject-wise Progress Statistics
-
----
+- 💾 SQLite Database Storage
+- 📚 Add, View & Remove Subjects
+- ✅ Add, View, Complete & Delete Tasks
+- 📊 Progress Dashboard
+- 📈 Subject-wise Progress Tracking
+- 🎯 Completion Percentage
+- 🚫 Duplicate Username & Subject Detection
 
 ## 🛠️ Tech Stack
 
 - Python
-- JSON
+- SQLite3
 - Git
 - GitHub
 
 ---
+## 🗄️ Database Design
 
-## 📂 Project Structure
+The project uses SQLite with three tables:
 
-```
+- Users
+- Subjects
+- Tasks
+
+Relationships:
+
+Users (1) ──────< Subjects
+
+Users (1) ──────< Tasks
+
+# Project Structure
+
 Study-Management-System/
 │
 ├── auth.py
 ├── dashboard.py
-├── database.py
-├── main.py
+├── subjects.py
+├── tasks.py
 ├── progress.py
-├── storage.py
-├── subject.py
-├── task.py
-├── data_study_planner.json
-├── .gitignore
-└── README.md
-```
-
+├── database_setup.py
+├── study.db
+├── README.md
+├── LICENSE
+└── screenshots/
 ---
-
-## 🚀 Getting Started
-
-### Clone the repository
-
-```
-git clone https://github.com/swetarkshukla/Study-Management-System.git
-```
-
-### Move into the project folder
-
-```
-cd Study-Management-System
-```
-
-### Run the application
-
-```
-python main.py
-```
-
----
-
-## 📸 Screenshots
-
 ## 📸 Screenshots
 
 ### 🏠 Main Menu
@@ -109,26 +91,28 @@ python main.py
 
 - SQLite database integration
 - Flask web application
-- Password hashing
 - Study streak system
-- Due dates for tasks
 - Task priorities
 - Search and filter tasks
+- Password hashing
+- Deadline support
+- Due dates
+- Search tasks
+- Email reminders
+
 
 ---
 
-## 📖 What I Learned
+## 📚 What I Learned
 
-While building this project, I learned about:
+This project was my first complete database-driven application. While building it, I learned:
 
-- Python modules
-- Functions
-- Lists and dictionaries
-- JSON file handling
-- Exception handling
-- Modular project design
-- Git and GitHub
-
+- How to replace in-memory Python lists with a SQLite database.
+- How to design database tables and relationships.
+- How to write SQL queries for inserting, retrieving, updating, and deleting data.
+- How to organize a larger Python project into separate modules.
+- How to debug real-world programming problems instead of only syntax errors.
+- How to document and publish a project professionally using Git and GitHub.
 ---
 
 ## 👨‍💻 Author

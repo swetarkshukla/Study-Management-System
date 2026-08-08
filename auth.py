@@ -1,6 +1,4 @@
-import database
 import dashboard
-import storage
 def get_non_empty_data(prompt):
     while True:
         a=input(prompt).strip()
@@ -9,13 +7,13 @@ def get_non_empty_data(prompt):
         else:
             return a
 def register():
+    import sqlite3
+    conn = sqlite3.connect("study.db")
+    cursor = conn.cursor()
     while True:
         us_name=get_non_empty_data("Choose a username: ")
-        username_exist=False
-        for ele in database.username:
-            if ele==us_name:
-                username_exist=True
-                break
+        cursor.execute("""SELECT * FROM Users WHERE Username = ?""",(us_name,))
+        username_exist = cursor.fetchone()
         if username_exist:
             print("The username already exists, please try again!!")
         else:
@@ -31,7 +29,6 @@ def register():
         try:
             sem=int(input("Enter your semester: "))
             if 1<=sem<=8:
-                database.semester.append(sem)
                 break
             else:
                 print("Semester cant be greater then 8 or less then 1!")
@@ -41,41 +38,41 @@ def register():
         try:
             cg=float(input("Enter your target CGPA: "))
             if 0.0<=cg<=10.0:
-                database.cgpa_target.append(cg)
                 break
             else:
                  print("CGPA can't be bigger then 10.0 and less then 0.0!")
         except ValueError:
             print("Invalid DataType for CGPA!")
-    database.username.append(us_name)
-    database.name.append(n)
-    database.course.append(cou)
-    database.password.append(pas)
-    database.subject_uni.append([])
-    database.tasks_uni.append([])
-    storage.save_data()
+    cursor.execute("""INSERT INTO Users(Username, Password, Name, Course, Semester, Target_CGPA) VALUES(?,?,?,?,?,?)""",(us_name,pas,n,cou,sem,cg))
+    conn.commit()
+    conn.close()
     print('''✅ Registration Successful!
 Please login to continue.''')
 password_limit=0
 def login():
+    import sqlite3
+    conn = sqlite3.connect("study.db")
+    cursor = conn.cursor()
     global password_limit
+    global user_id
     while(password_limit<3):
         k=False
         n=input("Enter your username: ")
         pa=input("Enter your password: ")
-        for i in range(0,len(database.username)):
-            if database.username[i]==n and database.password[i]==pa:
-                global usercode
-                usercode=i
-                print("======================================")
-                print("Welcome Back",database.name[i],"🔥")
-                print("Course: ",database.course[i])
-                print("Semester: ",database.semester[i])
-                print("Target CGPA: ",database.cgpa_target[i], "💪")
-                print("======================================")
-                k=True
-                dashboard.second_landing_screen()
-                break
+        cursor.execute("""SELECT * FROM Users WHERE Username =? AND Password=?""", (n,pa))
+        check_username= cursor.fetchone()
+        if check_username:
+            user_id, username, password, name, course, semester, cgpa = check_username
+            print("======================================")
+            print("Welcome Back",name,"🔥")
+            print("Course: ",course)
+            print("Semester: ",semester)
+            print("Target CGPA: ",cgpa, "💪")
+            print("======================================")
+            conn.close()
+            k=True
+            dashboard.second_landing_screen()
+            break
         if k!=True:
             print("Username or password is incorrect.")
             password_limit+=1
